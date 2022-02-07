@@ -1,0 +1,8 @@
+name: BarlowHSIC
+channels:
+  - pytorch
+dependencies:
+  - pytorch
+  - torchvision
+  - pip:
+    - thop
