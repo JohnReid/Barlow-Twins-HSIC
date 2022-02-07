@@ -2,7 +2,8 @@ name: BarlowHSIC
 channels:
   - pytorch
 dependencies:
-  - pytorch
-  - torchvision
+  - pip>=21.2.4
+  - pytorch>=1.10.2
+  - torchvision>=0.11.3
   - pip:
     - thop
