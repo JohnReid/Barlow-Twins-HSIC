@@ -32,11 +32,11 @@ def train(net, data_loader, train_optimizer):
         feature_1, out_1 = net(pos_1)
         feature_2, out_2 = net(pos_2)
         # Barlow Twins
-        
+
         # normalize the representations along the batch dimension
         out_1_norm = (out_1 - out_1.mean(dim=0)) / out_1.std(dim=0)
         out_2_norm = (out_2 - out_2.mean(dim=0)) / out_2.std(dim=0)
-        
+
         # cross-correlation matrix
         c = torch.matmul(out_1_norm.T, out_2_norm) / batch_size
 
@@ -51,7 +51,6 @@ def train(net, data_loader, train_optimizer):
             # encouraging off_diag to be negative ones
             off_diag = off_diagonal(c).add_(1).pow_(2).sum()
         loss = on_diag + lmbda * off_diag
-        
 
         train_optimizer.zero_grad()
         loss.backward()
@@ -188,7 +187,7 @@ if __name__ == '__main__':
     else:
         corr_neg_one_str = ''
     save_name_pre = '{}{}_{}_{}_{}'.format(corr_neg_one_str, lmbda, feature_dim, batch_size, dataset)
-    
+
     if not os.path.exists('results'):
         os.mkdir('results')
     best_acc = 0.0
